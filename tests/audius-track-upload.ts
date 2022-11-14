@@ -11,6 +11,19 @@ describe("audius-track-upload", () => {
   it("Is initialized!", async () => {
     // Add your test here.
     const tx = await program.methods.initialize().rpc();
+    
     console.log("Your transaction signature", tx);
   });
+
+  it("uploads track!", async () => {
+    const keyPair = anchor.web3.Keypair.generate();
+    const one = (program.provider as anchor.AnchorProvider).wallet
+
+    let cid = "cid";
+    const tx = await program.methods
+      .upload_track(cid)
+      .signers(keyPair)
+      .rpc();
+    console.log("success", tx);
+  })
 });
