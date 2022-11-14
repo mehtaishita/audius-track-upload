@@ -13,3 +13,25 @@ pub mod audius_track_upload {
 
 #[derive(Accounts)]
 pub struct Initialize {}
+
+#[derive(Accounts)]
+pub struct TrackLibrary<'info> {
+    #[account(mut)]
+    pub all_tracks: HashMap<String,Track>
+    
+}
+
+#[account]
+#[derive(Default)]
+pub struct Track {
+    pub cid: String
+    // extra: add metadata type (with title or album art)
+}
+
+impl Track {
+    pub fn new_track_id() -> String { // should be result
+        // TODO: unique id each time
+        String::from("unique")
+    }
+}
+
