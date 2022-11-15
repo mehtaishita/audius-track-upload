@@ -9,7 +9,7 @@ describe("audius-track-upload", () => {
   const program = anchor.workspace.AudiusTrackUpload as Program<AudiusTrackUpload>;
 
   // rudimentary test
-  it("It uploads track!", async () => {
+  it("It finishes the transaction!", async () => {
     const keyPair = anchor.web3.Keypair.generate();
 
     let cid = "QmY9cxiHqTFoWamkQVkpmmqzBrY3hCBEL2XNu3NtX74Fuu"; // example for file 'hello'
