@@ -8,18 +8,11 @@ describe("audius-track-upload", () => {
 
   const program = anchor.workspace.AudiusTrackUpload as Program<AudiusTrackUpload>;
 
-  it("Is initialized!", async () => {
-    // Add your test here.
-    const tx = await program.methods.initialize().rpc();
-    
-    console.log("Your transaction signature", tx);
-  });
-
-  it("uploads track!", async () => {
+  // rudimentary test
+  it("It uploads track!", async () => {
     const keyPair = anchor.web3.Keypair.generate();
-    const one = (program.provider as anchor.AnchorProvider).wallet
 
-    let cid = "cid";
+    let cid = "QmY9cxiHqTFoWamkQVkpmmqzBrY3hCBEL2XNu3NtX74Fuu"; // example for file 'hello'
     const tx = await program.methods.upload_track(cid).signers(keyPair).rpc();
     console.log("success", tx);
   })
