@@ -11,7 +11,7 @@
 
 I decided to use Anchor to write the project because of its clean setup. 
 I started with writing the instructions setup, creating a new context for the program `TracksLibrary` and creating an `Account` type `Tracks`.
-It seemed ideal to use a HashMap to store the tracks library because checks will O(1) for ensuring the track CID doesn't already exist. 
+It seemed ideal to use a HashMap to store the tracks library because fetches will O(1), especially if the track_id format is changed. 
 
 For unique key generation, my first idea was to use Rust's random library and generate a set of alphanumeric characters. 
 However, Solana, and other blockchains, strive for a no-std envrionment. The next idea was to use a simple counter `u64`. The design is to update the current maximum track id when a new track is uploaded.
