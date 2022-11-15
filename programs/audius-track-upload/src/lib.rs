@@ -1,7 +1,5 @@
 use anchor_lang::prelude::*;
 use std::collections::HashMap;
-use std::rand::distributions::{Alphanumeric, DistString};
-use std::rand::{thread_rng};
 
 declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 
@@ -45,8 +43,6 @@ pub struct Track {
 
 impl Track {
     pub fn new_track_id() -> Result<String> {
-        // borrowed from rust-random docs/examples
-        let id = Alphanumeric.sample_string(&mut rand::thread_rng(), 16);
-        Ok(id)
+        Ok(String::from("I am unique"))
     }
 }
