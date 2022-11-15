@@ -13,11 +13,11 @@ pub mod audius_track_upload {
         Ok(())
     }
 
-    pub fn upload_track<'info>(ctx: Context<TrackLibrary>, cid: String) -> Result<()> {
+    pub fn upload_track<'info>(ctx: Context<UploadTracks>, cid: String) -> Result<()> {
         // TODO: if (no all tracks no init) let mut all_tracks = HashMap::new();
         let track_id = Track::new_track_id().unwrap();
         let new_track = Track { cid };
-        ctx.accounts.all_tracks.insert(track_id,new_track);
+        ctx.accounts.all_tracks.library.insert(track_id,new_track);
         Ok(())
     }
 }
@@ -26,13 +26,17 @@ pub mod audius_track_upload {
 pub struct Initialize {}
 
 #[derive(Accounts)]
-pub struct TrackLibrary<'info> {
+pub struct UploadTracks<'info> {
     #[account(mut)]
-    pub all_tracks: HashMap<String,Track>
-    
+    pub all_tracks: Account<'info, TracksLibrary>
 }
 
 #[account]
+pub struct TracksLibrary {
+    library: HashMap<String, Track>
+}
+
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, PartialEq, Eq)]
 #[derive(Default)]
 pub struct Track {
     pub cid: String
