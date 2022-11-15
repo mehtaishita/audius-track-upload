@@ -18,9 +18,9 @@ pub mod audius_track_upload {
         require!(cid.len() >= 46, TrackUploadErrors::TrackAddressTooShort); // ipfs cid v0 are 46 chars long, not sure about v1
         let track_id = Track::new_track_id().unwrap();
         let new_track = Track { cid };
-        ctx.accounts.all_tracks.library.insert(track_id, new_track);
+        ctx.accounts.all_tracks.library.insert(TrackID{ track_id }, new_track);
         // TODO: set current track id maximum (to generate next id easily)
-        Ok(track_id)
+        Ok(TrackID{ track_id })
     }
 
     pub fn get_track(ctx: Context<TracksLibrary>, track_id: TrackID) -> Result<String> {
@@ -53,7 +53,7 @@ pub struct Tracks {
 #[account]
 #[derive(PartialOrd, PartialEq, Eq, Hash)]
 pub struct TrackID {
-    id: u64
+    track_id: u64
 }
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, PartialEq, Eq)]
@@ -64,9 +64,9 @@ pub struct Track {
 }
 
 impl Track {
-    pub fn new_track_id() -> Result<TrackID> {
+    pub fn new_track_id() -> Result<u64> {
         // TODO: let next = Self::get_current_track_id().check_add(1).ok();
-        let next = TrackID { id: 1 };
+        let next = 1;
         Ok(next)
     }
 }
