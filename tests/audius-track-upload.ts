@@ -20,10 +20,7 @@ describe("audius-track-upload", () => {
     const one = (program.provider as anchor.AnchorProvider).wallet
 
     let cid = "cid";
-    const tx = await program.methods
-      .upload_track(cid)
-      .signers(keyPair)
-      .rpc();
+    const tx = await program.methods.upload_track(cid).signers(keyPair).rpc();
     console.log("success", tx);
   })
 });
